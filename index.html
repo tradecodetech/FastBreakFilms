@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast Break Films</title>
+
+<title>Fast Break Films | Visual Storytelling</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -37,7 +40,6 @@ z-index:10;
 
 .logo{
 font-weight:700;
-font-size:20px;
 letter-spacing:2px;
 }
 
@@ -128,6 +130,12 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:18px;
+transition:0.3s;
+}
+
+.portfolio-item:hover{
+background:#ff3c00;
+cursor:pointer;
 }
 
 /* SERVICES */
@@ -171,6 +179,34 @@ color:white;
 cursor:pointer;
 }
 
+/* REEL MODAL */
+
+.modal{
+display:none;
+position:fixed;
+z-index:100;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+
+.modal video{
+width:80%;
+max-width:900px;
+}
+
+.close{
+position:absolute;
+top:40px;
+right:60px;
+font-size:40px;
+cursor:pointer;
+}
+
 /* FOOTER */
 
 footer{
@@ -192,6 +228,7 @@ margin-top:60px;
 
 <nav>
 <a href="#">Home</a>
+<a href="#about">About</a>
 <a href="#portfolio">Portfolio</a>
 <a href="#services">Services</a>
 <a href="#contact">Contact</a>
@@ -199,6 +236,7 @@ margin-top:60px;
 
 </header>
 
+<!-- HERO -->
 
 <section class="hero">
 
@@ -209,59 +247,81 @@ margin-top:60px;
 <div class="hero-overlay"></div>
 
 <div class="hero-content">
+
 <h1>FAST BREAK FILMS</h1>
-<p>Cinematic Storytelling & Creative Production</p>
-<button class="hero-button">Watch Our Work</button>
+<p>Independent Filmmaking & Visual Storytelling</p>
+
+<button class="hero-button" onclick="openReel()">Watch Reel</button>
+
 </div>
 
 </section>
 
+<!-- ABOUT -->
+
+<section class="section" id="about">
+
+<h2>The Filmmaker</h2>
+
+<p style="max-width:700px;margin:auto;margin-top:20px;line-height:1.7;">
+
+Fast Break Films is the creative vision behind cinematic storytelling that captures culture, moments, and real experiences through film.
+
+From music videos to creative projects and event coverage, every story is told with a focus on emotion, energy, and visual impact.
+
+</p>
+
+</section>
+
+<!-- PORTFOLIO -->
 
 <section class="section" id="portfolio">
 
-<h2>Recent Projects</h2>
+<h2>Recent Work</h2>
 
 <div class="portfolio">
 
 <div class="portfolio-item">Music Video</div>
-<div class="portfolio-item">Commercial Shoot</div>
-<div class="portfolio-item">Event Coverage</div>
-<div class="portfolio-item">Brand Story</div>
+<div class="portfolio-item">Short Film</div>
+<div class="portfolio-item">Event Highlight</div>
+<div class="portfolio-item">Creative Project</div>
 
 </div>
 
 </section>
 
+<!-- SERVICES -->
 
 <section class="section" id="services">
 
-<h2>Services</h2>
+<h2>Creative Services</h2>
 
 <div class="services">
 
 <div class="service">
-<h3>Video Production</h3>
-<p>Full cinematic production from concept to final cut.</p>
+<h3>Music Videos</h3>
+<p>Cinematic visuals for artists and creators.</p>
 </div>
 
 <div class="service">
-<h3>Commercial Filming</h3>
-<p>High quality commercial video production for brands.</p>
+<h3>Event Coverage</h3>
+<p>Capturing live moments with cinematic storytelling.</p>
 </div>
 
 <div class="service">
-<h3>Editing & Post</h3>
-<p>Professional editing, color grading, and sound design.</p>
+<h3>Creative Direction</h3>
+<p>Helping bring visual concepts to life through film.</p>
 </div>
 
 </div>
 
 </section>
 
+<!-- CONTACT -->
 
 <section class="section" id="contact">
 
-<h2>Start Your Project</h2>
+<h2>Work With Fast Break Films</h2>
 
 <div class="contact-form">
 
@@ -279,9 +339,35 @@ margin-top:60px;
 
 <footer>
 
-<p>Fast Break Creative Productions LLC</p>
+<p>Fast Break Films | Fast Break Creative Productions LLC</p>
 
 </footer>
+
+<!-- REEL MODAL -->
+
+<div class="modal" id="reelModal">
+
+<span class="close" onclick="closeReel()">×</span>
+
+<video controls autoplay>
+
+<source src="https://cdn.coverr.co/videos/coverr-filming-a-movie-scene-5170/1080p.mp4" type="video/mp4">
+
+</video>
+
+</div>
+
+<script>
+
+function openReel(){
+document.getElementById("reelModal").style.display="flex";
+}
+
+function closeReel(){
+document.getElementById("reelModal").style.display="none";
+}
+
+</script>
 
 </body>
 </html>
