@@ -4,224 +4,915 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0908">
+<meta name="description" content="Macc Visionz — independent filmmaking and visual storytelling. Portfolio, creative services, and an upcoming feature film rooted in memory and legacy.">
 
-<title>Fast Break Films | Visual Storytelling</title>
+<meta property="og:title" content="Macc Visionz | Visual Storytelling">
+<meta property="og:description" content="Independent filmmaking and visual storytelling. Portfolio, creative services, and an upcoming feature film.">
+<meta property="og:type" content="website">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>Macc Visionz | Visual Storytelling</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230a0908'/%3E%3Cpath d='M20 40 L80 40 L80 78 Q80 82 76 82 L24 82 Q20 82 20 78 Z' fill='%23f4f1ea'/%3E%3Cpath d='M18 40 L24 24 L36 24 L32 40 Z M40 40 L36 24 L48 24 L52 40 Z M60 40 L56 24 L68 24 L72 40 Z M80 40 L76 24 L82 24 L84 40 Z' fill='%23e2481c'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
+:root{
+  --bg: #0a0908;
+  --bg-alt: #131211;
+  --card: #171513;
+  --line: rgba(244,241,234,0.08);
+  --ink: #f4f1ea;
+  --ink-dim: rgba(244,241,234,0.62);
+  --ink-faint: rgba(244,241,234,0.38);
+  --accent: #e2481c;
+  --accent-dim: rgba(226,72,28,0.14);
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-background:#0b0b0b;
-color:white;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+::selection{
+  background:var(--accent);
+  color:#0a0908;
+}
+
+h1,h2,h3,.display{
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:400;
+  letter-spacing:0.04em;
+  line-height:0.95;
+}
+
+a{ color:inherit; }
+
+/* film-grain texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:200;
+  pointer-events:none;
+  opacity:0.035;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:22px;
+}
+
+.eyebrow::before{
+  content:"";
+  width:26px;
+  height:1px;
+  background:var(--accent);
 }
 
 /* NAV */
 
 header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
-position:fixed;
-width:100%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:26px 6%;
+  position:fixed;
+  width:100%;
+  top:0;
+  background:linear-gradient(to bottom, rgba(10,9,8,0.85), transparent);
+  z-index:100;
+  transition:background 0.4s var(--ease), padding 0.4s var(--ease);
+}
+
+header.scrolled{
+  background:rgba(10,9,8,0.85);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  padding:16px 6%;
+  border-bottom:1px solid var(--line);
 }
 
 .logo{
-font-weight:700;
-letter-spacing:2px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:0.12em;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-nav a{
-color:white;
-margin-left:30px;
-text-decoration:none;
-font-weight:300;
+.logo span{
+  color:var(--accent);
+}
+
+nav.desktop-nav{
+  display:flex;
+  align-items:center;
+  gap:44px;
+}
+
+nav.desktop-nav a{
+  position:relative;
+  text-decoration:none;
+  font-size:13px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  transition:color 0.3s var(--ease);
+}
+
+nav.desktop-nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:var(--accent);
+  transition:width 0.35s var(--ease);
+}
+
+nav.desktop-nav a:hover{
+  color:var(--ink);
+}
+
+nav.desktop-nav a:hover::after{
+  width:100%;
+}
+
+.nav-cta{
+  border:1px solid var(--ink-faint);
+  padding:9px 20px !important;
+  border-radius:2px;
+}
+
+.nav-cta:hover{
+  border-color:var(--accent);
+}
+
+.menu-btn{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  z-index:110;
+  padding:8px;
+}
+
+.menu-btn span{
+  width:26px;
+  height:1px;
+  background:var(--ink);
+  transition:transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+.menu-btn.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.menu-btn.open span:nth-child(2){ opacity:0; }
+.menu-btn.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+.mobile-nav{
+  position:fixed;
+  inset:0;
+  background:#0a0908;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:34px;
+  z-index:99;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-16px);
+  transition:opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s;
+}
+
+.mobile-nav.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.mobile-nav a{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:34px;
+  letter-spacing:0.05em;
+  text-decoration:none;
+  color:var(--ink);
 }
 
 /* HERO */
 
 .hero{
-height:100vh;
-position:relative;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-overflow:hidden;
+  height:100vh;
+  min-height:640px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
 }
 
 .hero video{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-1;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+  filter:grayscale(15%) contrast(1.08);
 }
 
 .hero-overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.55);
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at center, rgba(10,9,8,0.35) 0%, rgba(10,9,8,0.88) 78%),
+    linear-gradient(to bottom, rgba(10,9,8,0.7) 0%, rgba(10,9,8,0.3) 30%, rgba(10,9,8,0.55) 70%, rgba(10,9,8,0.95) 100%);
+}
+
+.hero-content{
+  padding:0 24px;
+  opacity:0;
+  transform:translateY(24px);
+  animation:heroIn 1.2s var(--ease) 0.3s forwards;
+}
+
+@keyframes heroIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.hero-kicker{
+  font-size:12px;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  margin-bottom:24px;
 }
 
 .hero-content h1{
-font-size:70px;
-letter-spacing:4px;
+  font-size:clamp(52px, 11vw, 148px);
+  letter-spacing:0.03em;
 }
 
 .hero-content p{
-margin-top:15px;
-font-size:20px;
-font-weight:300;
+  margin-top:20px;
+  font-size:clamp(15px, 2vw, 19px);
+  font-weight:300;
+  color:var(--ink-dim);
+  letter-spacing:0.02em;
 }
 
-.hero-button{
-margin-top:30px;
-padding:14px 35px;
-background:#ff3c00;
-border:none;
-color:white;
-font-size:16px;
-cursor:pointer;
+.hero-actions{
+  margin-top:44px;
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:16px 34px;
+  font-size:13px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  border-radius:2px;
+  transition:transform 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
+  font-family:'Inter',sans-serif;
+}
+
+.btn-primary{
+  background:var(--accent);
+  border:1px solid var(--accent);
+  color:#0a0908;
+  font-weight:500;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  background:#f4611f;
+}
+
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--ink-faint);
+  color:var(--ink);
+}
+
+.btn-ghost:hover{
+  border-color:var(--ink);
+  transform:translateY(-2px);
+}
+
+.scroll-cue{
+  position:absolute;
+  bottom:36px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:var(--ink-faint);
+  font-size:11px;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+}
+
+.scroll-cue .line{
+  width:1px;
+  height:36px;
+  background:linear-gradient(to bottom, var(--ink-faint), transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse{
+  0%,100%{ opacity:0.3; }
+  50%{ opacity:1; }
 }
 
 /* SECTIONS */
 
 .section{
-padding:100px 10%;
-text-align:center;
+  padding:140px 6%;
+  position:relative;
 }
 
-.section h2{
-font-size:36px;
-margin-bottom:20px;
+.section-inner{
+  max-width:1140px;
+  margin:0 auto;
+}
+
+.section-head{
+  max-width:640px;
+  margin-bottom:64px;
+}
+
+.section-head.center{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+.section-head h2{
+  font-size:clamp(34px, 5vw, 58px);
+}
+
+.section-head p{
+  margin-top:18px;
+  color:var(--ink-dim);
+  font-size:16px;
+  line-height:1.75;
+}
+
+.alt-bg{
+  background:var(--bg-alt);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.reveal.in-view{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FILMMAKER */
+
+.filmmaker-grid{
+  display:grid;
+  grid-template-columns:0.85fr 1.15fr;
+  gap:70px;
+  align-items:center;
+}
+
+.filmmaker-portrait{
+  aspect-ratio:4/5;
+  background:
+    linear-gradient(160deg, rgba(226,72,28,0.16), transparent 60%),
+    var(--card);
+  border:1px solid var(--line);
+  border-radius:4px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  padding:26px;
+}
+
+.filmmaker-portrait::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(115deg, transparent 0 34px, rgba(244,241,234,0.025) 34px 35px);
+}
+
+.filmmaker-portrait .tag{
+  position:relative;
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  border:1px solid var(--line);
+  padding:8px 14px;
+  border-radius:2px;
+  backdrop-filter:blur(6px);
+}
+
+.filmmaker-copy h3{
+  font-size:30px;
+  margin-bottom:18px;
+  color:var(--accent);
+}
+
+.filmmaker-copy p{
+  color:var(--ink-dim);
+  line-height:1.85;
+  font-size:16px;
+  margin-bottom:20px;
+}
+
+.philosophy-row{
+  margin-top:38px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+}
+
+.philosophy-row div{
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+
+.philosophy-row h4{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;
+  letter-spacing:0.05em;
+  margin-bottom:8px;
+  color:var(--ink);
+}
+
+.philosophy-row p{
+  font-size:13.5px;
+  color:var(--ink-faint);
+  line-height:1.6;
+}
+
+.social-row{
+  margin-top:40px;
+  display:flex;
+  gap:26px;
+}
+
+.social-row a{
+  font-size:12px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink-dim);
+  border-bottom:1px solid transparent;
+  transition:color 0.3s, border-color 0.3s;
+}
+
+.social-row a:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* FILM PROJECT */
+
+.film-hero{
+  position:relative;
+  padding:150px 6%;
+  background:
+    linear-gradient(to bottom, rgba(10,9,8,0.55), rgba(10,9,8,0.95)),
+    repeating-linear-gradient(120deg, #14100e 0 2px, #100d0b 2px 42px);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-align:center;
+}
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  padding:8px 16px;
+  border-radius:20px;
+  margin-bottom:30px;
+}
+
+.status-badge::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:scrollPulse 1.6s ease-in-out infinite;
+}
+
+.film-hero h2{
+  font-size:clamp(38px, 6.5vw, 84px);
+  max-width:900px;
+  margin:0 auto;
+}
+
+.film-hero .logline{
+  max-width:620px;
+  margin:26px auto 0;
+  color:var(--ink-dim);
+  font-size:17px;
+  line-height:1.8;
+}
+
+.film-hero .director-credit{
+  margin-top:34px;
+  font-size:12px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+
+.film-body{
+  padding:130px 6%;
+}
+
+.film-columns{
+  max-width:1140px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:50px;
+}
+
+.film-col .num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;
+  color:var(--accent);
+  letter-spacing:0.1em;
+  margin-bottom:14px;
+  display:block;
+}
+
+.film-col h3{
+  font-size:26px;
+  margin-bottom:16px;
+}
+
+.film-col p{
+  color:var(--ink-dim);
+  line-height:1.85;
+  font-size:15.5px;
+}
+
+.film-note{
+  max-width:1140px;
+  margin:70px auto 0;
+  padding-top:40px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
+}
+
+.film-note p{
+  color:var(--ink-faint);
+  font-size:14px;
+  max-width:560px;
+  line-height:1.7;
 }
 
 /* PORTFOLIO */
 
-.portfolio{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-margin-top:40px;
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2px;
+  background:var(--line);
+  border:1px solid var(--line);
 }
 
 .portfolio-item{
-background:#1a1a1a;
-height:200px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:18px;
-transition:0.3s;
+  background:var(--bg);
+  aspect-ratio:4/5;
+  position:relative;
+  overflow:hidden;
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
 }
 
-.portfolio-item:hover{
-background:#ff3c00;
-cursor:pointer;
+.portfolio-item::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(155deg, rgba(226,72,28,0.0), rgba(226,72,28,0.0));
+  transition:background 0.5s var(--ease);
+}
+
+.portfolio-item:hover::before{
+  background:linear-gradient(155deg, rgba(226,72,28,0.22), transparent 65%);
+}
+
+.portfolio-item .p-index{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;
+  color:var(--ink-faint);
+  letter-spacing:0.1em;
+}
+
+.portfolio-item .p-meta{
+  position:relative;
+}
+
+.portfolio-item .p-type{
+  font-size:11px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:10px;
+  display:block;
+}
+
+.portfolio-item h3{
+  font-size:26px;
+  transition:transform 0.4s var(--ease);
+}
+
+.portfolio-item:hover h3{
+  transform:translateX(6px);
+}
+
+.portfolio-item .p-year{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--ink-faint);
+  letter-spacing:0.08em;
 }
 
 /* SERVICES */
 
 .services{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin-top:10px;
 }
 
 .service{
-background:#1a1a1a;
-padding:40px;
+  background:var(--bg-alt);
+  padding:50px 36px;
+  transition:background 0.4s var(--ease);
 }
 
-/* FILM PROJECT */
+.service:hover{
+  background:var(--card);
+}
 
-.film-box{
-max-width:800px;
-margin:auto;
-margin-top:25px;
-line-height:1.7;
+.service .s-num{
+  font-family:'Bebas Neue',sans-serif;
+  color:var(--accent);
+  font-size:16px;
+  margin-bottom:26px;
+  display:block;
+}
+
+.service h3{
+  font-size:24px;
+  margin-bottom:14px;
+}
+
+.service p{
+  color:var(--ink-dim);
+  font-size:14.5px;
+  line-height:1.7;
 }
 
 /* CONTACT */
 
-.contact-form{
-max-width:600px;
-margin:auto;
-margin-top:30px;
+.contact-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:70px;
 }
 
+.contact-info p{
+  color:var(--ink-dim);
+  line-height:1.85;
+  font-size:16px;
+  margin-bottom:28px;
+}
+
+.contact-info a.email{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;
+  color:var(--accent);
+  text-decoration:none;
+  letter-spacing:0.02em;
+}
+
+.contact-form label{
+  display:block;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:8px;
+  margin-top:22px;
+}
+
+.contact-form label:first-child{ margin-top:0; }
+
 .contact-form input,
+.contact-form select,
 .contact-form textarea{
-width:100%;
-padding:12px;
-margin-top:10px;
-background:#1a1a1a;
-border:none;
-color:white;
+  width:100%;
+  padding:14px 4px;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--line);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  font-weight:300;
+  transition:border-color 0.3s;
+}
+
+.contact-form select option{
+  background:var(--bg-alt);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{
+  outline:none;
+  border-color:var(--accent);
 }
 
 .contact-form button{
-margin-top:15px;
-padding:12px 30px;
-background:#ff3c00;
-border:none;
-color:white;
-cursor:pointer;
-}
-
-/* MODAL REEL */
-
-.modal{
-display:none;
-position:fixed;
-z-index:100;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
-}
-
-.modal video{
-width:80%;
-max-width:900px;
-}
-
-.close{
-position:absolute;
-top:40px;
-right:60px;
-font-size:40px;
-cursor:pointer;
+  margin-top:34px;
 }
 
 /* FOOTER */
 
 footer{
-padding:40px;
-text-align:center;
-background:black;
-margin-top:60px;
+  padding:60px 6% 40px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+footer .f-brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  letter-spacing:0.1em;
+}
+
+footer .f-legal{
+  font-size:12.5px;
+  color:var(--ink-faint);
+  letter-spacing:0.03em;
+}
+
+footer .f-links{
+  display:flex;
+  gap:26px;
+}
+
+footer .f-links a{
+  font-size:12px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink-faint);
+  transition:color 0.3s;
+}
+
+footer .f-links a:hover{
+  color:var(--accent);
+}
+
+/* MODAL REEL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(6,5,4,0.96);
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  transition:opacity 0.35s var(--ease);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal.show.visible{
+  opacity:1;
+}
+
+.modal video{
+  width:82%;
+  max-width:960px;
+  border:1px solid var(--line);
+}
+
+.close{
+  position:absolute;
+  top:34px;
+  right:5%;
+  font-size:16px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  cursor:pointer;
+  color:var(--ink-dim);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.close:hover{
+  color:var(--ink);
+}
+
+@media(max-width:900px){
+  nav.desktop-nav{ display:none; }
+  .menu-btn{ display:flex; }
+  .filmmaker-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:46px;
+  }
+  .philosophy-row{ grid-template-columns:1fr 1fr; }
+  .film-columns{ grid-template-columns:1fr; gap:40px; }
+  .services{ grid-template-columns:1fr; }
+  .section{ padding:100px 7%; }
+  footer{ flex-direction:column; align-items:flex-start; }
+}
+
+@media(max-width:520px){
+  .philosophy-row{ grid-template-columns:1fr; }
+  .hero-actions{ flex-direction:column; width:100%; }
+  .btn{ justify-content:center; }
 }
 
 </style>
@@ -230,27 +921,40 @@ margin-top:60px;
 
 <body>
 
-<header>
+<header id="siteHeader">
 
-<div class="logo">FAST BREAK FILMS</div>
+<a href="#top" class="logo">MACC<span>&nbsp;VISIONZ</span></a>
 
-<nav>
-<a href="#">Home</a>
-<a href="#about">About</a>
+<nav class="desktop-nav">
+<a href="#top">Home</a>
+<a href="#filmmaker">The Filmmaker</a>
+<a href="#film">The Film</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#services">Services</a>
+<a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+<span></span><span></span><span></span>
+</button>
+
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+<a href="#top">Home</a>
+<a href="#filmmaker">The Filmmaker</a>
 <a href="#film">The Film</a>
 <a href="#portfolio">Portfolio</a>
 <a href="#services">Services</a>
 <a href="#contact">Contact</a>
-</nav>
-
-</header>
+</div>
 
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero" id="top">
 
-<video autoplay muted loop>
+<video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-film-camera-3624/1080p.mp4" type="video/mp4">
 </video>
 
@@ -258,11 +962,21 @@ margin-top:60px;
 
 <div class="hero-content">
 
-<h1>FAST BREAK FILMS</h1>
-<p>Independent Filmmaking & Visual Storytelling</p>
+<div class="hero-kicker">Fast Break Creative Productions LLC</div>
 
-<button class="hero-button" onclick="openReel()">Watch Reel</button>
+<h1>MACC VISIONZ</h1>
+<p>Independent Filmmaking &amp; Visual Storytelling</p>
 
+<div class="hero-actions">
+<button class="btn btn-primary" onclick="openReel()">Watch Reel</button>
+<a href="#film" class="btn btn-ghost">The Upcoming Film</a>
+</div>
+
+</div>
+
+<div class="scroll-cue">
+<span>Scroll</span>
+<span class="line"></span>
 </div>
 
 </section>
@@ -270,47 +984,110 @@ margin-top:60px;
 
 <!-- FILMMAKER -->
 
-<section class="section" id="about">
+<section class="section" id="filmmaker">
+<div class="section-inner">
 
-<h2>The Filmmaker</h2>
+<div class="filmmaker-grid">
 
-<p style="max-width:700px;margin:auto;margin-top:20px;line-height:1.7;">
+<div class="filmmaker-portrait reveal">
+<span class="tag">Director / Cinematographer</span>
+</div>
 
-Fast Break Films is the creative vision behind cinematic storytelling that captures real experiences, culture, and powerful moments through film.
+<div class="filmmaker-copy reveal">
 
-Each project focuses on visual emotion and narrative — creating films that connect people to stories that matter.
+<div class="eyebrow">The Filmmaker</div>
+<h3>Behind the Lens</h3>
 
+<p>
+Macc Visionz is the creative vision behind cinematic storytelling that captures real experiences, culture, and powerful moments through film.
 </p>
 
+<p>
+Each project focuses on visual emotion and narrative — creating films that connect people to stories that matter. It's less about chasing polish for its own sake, and more about finding the frame that makes a story feel true.
+</p>
+
+<div class="philosophy-row">
+
+<div>
+<h4>Story First</h4>
+<p>Every technical choice serves the narrative, never the other way around.</p>
+</div>
+
+<div>
+<h4>Real Moments</h4>
+<p>Drawn to authenticity over spectacle — people, culture, and lived experience.</p>
+</div>
+
+<div>
+<h4>Built to Last</h4>
+<p>Work made to hold up years from now, not just perform in a single scroll.</p>
+</div>
+
+</div>
+
+<div class="social-row">
+<a href="#">Instagram</a>
+<a href="#">Vimeo</a>
+<a href="#">YouTube</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
 </section>
 
 
 <!-- FILM PROJECT -->
 
-<section class="section" id="film">
+<section id="film">
 
-<h2>The Film Project</h2>
+<div class="film-hero reveal">
 
-<div class="film-box">
+<div class="status-badge">In Development</div>
 
-<p>
+<h2>A Story of Legacy</h2>
 
-This upcoming film is a deeply personal project that explores memory, legacy, and the impact one life can have on the people who carry that story forward.
-
-The film serves as a tribute — honoring a life, preserving a story, and sharing a powerful narrative through cinematic storytelling.
-
+<p class="logline">
+An upcoming feature exploring memory, legacy, and the impact one life can have on the people who carry that story forward — a personal tribute told through cinematic storytelling.
 </p>
 
-<br>
+<p class="director-credit">A Film by Macc Visionz — Working Title</p>
 
+</div>
+
+<div class="film-body">
+<div class="section-inner">
+
+<div class="film-columns">
+
+<div class="film-col reveal">
+<span class="num">01</span>
+<h3>The Story</h3>
+<p>This film is a deeply personal project, built from memory and shaped by the people who lived it. It follows a life, and everyone that life touched — told with care, not spectacle.</p>
+</div>
+
+<div class="film-col reveal">
+<span class="num">02</span>
+<h3>The Legacy</h3>
+<p>Some stories aren't told to shock — they're told to remember. This project exists to honor a life well-lived, and to preserve it for the family and community that continue to carry it forward.</p>
+</div>
+
+<div class="film-col reveal">
+<span class="num">03</span>
 <h3>Director's Vision</h3>
+<p>Through this project, Macc Visionz aims to tell a story that is both personal and universal — one that reflects resilience, remembrance, and the importance of preserving the stories that shape us.</p>
+</div>
 
-<p>
+</div>
 
-Through this project, Fast Break Films aims to tell a story that is both personal and universal — one that reflects resilience, remembrance, and the importance of preserving the stories that shape our lives.
+<div class="film-note reveal">
+<p>Trailer, key art, and behind-the-scenes updates will be added here as production moves forward. This page will grow into a dedicated hub for the film.</p>
+<a href="#contact" class="btn btn-ghost">Follow the Project</a>
+</div>
 
-</p>
-
+</div>
 </div>
 
 </section>
@@ -318,74 +1095,150 @@ Through this project, Fast Break Films aims to tell a story that is both persona
 
 <!-- PORTFOLIO -->
 
-<section class="section" id="portfolio">
+<section class="section alt-bg" id="portfolio">
+<div class="section-inner">
 
-<h2>Recent Work</h2>
+<div class="section-head reveal">
+<div class="eyebrow">Selected Work</div>
+<h2>Portfolio</h2>
+<p>A working reel of recent projects — placeholders for now, replaced with real work as the archive grows.</p>
+</div>
 
-<div class="portfolio">
+<div class="portfolio-grid reveal">
 
-<div class="portfolio-item">Music Video</div>
-<div class="portfolio-item">Short Film</div>
-<div class="portfolio-item">Event Highlight</div>
-<div class="portfolio-item">Creative Project</div>
+<div class="portfolio-item">
+<span class="p-index">01</span>
+<div class="p-meta">
+<span class="p-type">Music Video</span>
+<h3>Night Shift</h3>
+<div class="p-year">2025</div>
+</div>
+</div>
+
+<div class="portfolio-item">
+<span class="p-index">02</span>
+<div class="p-meta">
+<span class="p-type">Short Film</span>
+<h3>Corner Store</h3>
+<div class="p-year">2024</div>
+</div>
+</div>
+
+<div class="portfolio-item">
+<span class="p-index">03</span>
+<div class="p-meta">
+<span class="p-type">Event Highlight</span>
+<h3>Homecoming</h3>
+<div class="p-year">2024</div>
+</div>
+</div>
+
+<div class="portfolio-item">
+<span class="p-index">04</span>
+<div class="p-meta">
+<span class="p-type">Creative Project</span>
+<h3>Still Frames</h3>
+<div class="p-year">2023</div>
+</div>
+</div>
 
 </div>
 
+</div>
 </section>
 
 
 <!-- SERVICES -->
 
 <section class="section" id="services">
+<div class="section-inner">
 
+<div class="section-head reveal">
+<div class="eyebrow">What I Do</div>
 <h2>Creative Services</h2>
+<p>A focused set of services built around the portfolio, not a menu that gets in its way.</p>
+</div>
 
-<div class="services">
+<div class="services reveal">
 
 <div class="service">
+<span class="s-num">01</span>
 <h3>Music Videos</h3>
-<p>Cinematic visuals for artists and creators.</p>
+<p>Cinematic visuals for artists and creators, built around the sound and the story behind it.</p>
 </div>
 
 <div class="service">
+<span class="s-num">02</span>
 <h3>Event Coverage</h3>
-<p>Capturing live moments with cinematic storytelling.</p>
+<p>Capturing live moments with cinematic storytelling — not just documentation, but a narrative of the day.</p>
 </div>
 
 <div class="service">
+<span class="s-num">03</span>
 <h3>Creative Direction</h3>
-<p>Helping bring visual concepts to life through film.</p>
+<p>Helping bring visual concepts to life through film, from first idea to finished cut.</p>
 </div>
 
 </div>
 
+</div>
 </section>
 
 
 <!-- CONTACT -->
 
-<section class="section" id="contact">
+<section class="section alt-bg" id="contact">
+<div class="section-inner">
 
-<h2>Work With Fast Break Films</h2>
+<div class="contact-grid">
 
-<div class="contact-form">
+<div class="contact-info reveal">
+<div class="eyebrow">Get in Touch</div>
+<h2 style="font-size:clamp(30px,4vw,44px); margin-bottom:22px;">Work With Macc Visionz</h2>
+<p>Have a project in mind — a music video, an event, or something built from the ground up? Send a few details and I'll follow up.</p>
+<a href="mailto:hello@maccvisionz.com" class="email">hello@maccvisionz.com</a>
+</div>
 
-<input type="text" placeholder="Name">
+<form class="contact-form reveal" onsubmit="return handleSubmit(event)">
 
-<input type="email" placeholder="Email">
+<label for="name">Name</label>
+<input id="name" type="text" placeholder="Your name" required>
 
-<textarea rows="5" placeholder="Tell us about your project"></textarea>
+<label for="email">Email</label>
+<input id="email" type="email" placeholder="you@email.com" required>
 
-<button>Send Inquiry</button>
+<label for="type">Project Type</label>
+<select id="type">
+<option>Music Video</option>
+<option>Short Film</option>
+<option>Event Coverage</option>
+<option>Creative Direction</option>
+<option>Something Else</option>
+</select>
+
+<label for="message">Project Description</label>
+<textarea id="message" rows="5" placeholder="Tell me about your project" required></textarea>
+
+<button class="btn btn-primary" type="submit">Send Inquiry</button>
+
+</form>
 
 </div>
 
+</div>
 </section>
 
 
 <footer>
 
-<p>Fast Break Films | Fast Break Creative Productions LLC</p>
+<div class="f-brand">MACC VISIONZ</div>
+<div class="f-legal">Fast Break Creative Productions LLC &copy; <span id="year"></span></div>
+
+<div class="f-links">
+<a href="#top">Home</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#contact">Contact</a>
+</div>
 
 </footer>
 
@@ -394,12 +1247,10 @@ Through this project, Fast Break Films aims to tell a story that is both persona
 
 <div class="modal" id="reelModal">
 
-<span class="close" onclick="closeReel()">×</span>
+<span class="close" onclick="closeReel()">Close &times;</span>
 
-<video controls autoplay>
-
+<video controls>
 <source src="https://cdn.coverr.co/videos/coverr-filming-a-movie-scene-5170/1080p.mp4" type="video/mp4">
-
 </video>
 
 </div>
@@ -407,12 +1258,76 @@ Through this project, Fast Break Films aims to tell a story that is both persona
 
 <script>
 
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* header scroll state */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive:true });
+
+/* mobile nav */
+const menuBtn = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+
+mobileNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuBtn.classList.remove('open');
+    mobileNav.classList.remove('open');
+  });
+});
+
+/* reel modal */
+const reelModal = document.getElementById('reelModal');
+const reelVideo = reelModal.querySelector('video');
+
 function openReel(){
-document.getElementById("reelModal").style.display="flex";
+  reelModal.classList.add('show');
+  requestAnimationFrame(() => reelModal.classList.add('visible'));
+  reelVideo.play();
 }
 
 function closeReel(){
-document.getElementById("reelModal").style.display="none";
+  reelModal.classList.remove('visible');
+  reelVideo.pause();
+  setTimeout(() => reelModal.classList.remove('show'), 350);
+}
+
+reelModal.addEventListener('click', (e) => {
+  if(e.target === reelModal) closeReel();
+});
+
+/* scroll reveal */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold:0.15 });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* contact form (prototype — no backend yet) */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const original = btn.textContent;
+  btn.textContent = 'Inquiry Sent';
+  btn.style.opacity = '0.7';
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.style.opacity = '1';
+    e.target.reset();
+  }, 2200);
+  return false;
 }
 
 </script>
